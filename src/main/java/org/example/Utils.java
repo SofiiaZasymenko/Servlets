@@ -1,11 +1,13 @@
 package org.example;
 
+import javax.servlet.http.Cookie;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Utils {
 
@@ -36,5 +38,14 @@ public class Utils {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public static Optional<Cookie> findCookieByName(String name, Cookie[] cookies) {
+        if (cookies == null) {
+            return Optional.empty();
+        }
+        return Arrays.stream(cookies)
+                .filter(cookie -> name.equals(cookie.getName()))
+                .findFirst();
     }
 }
